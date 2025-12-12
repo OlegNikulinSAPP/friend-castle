@@ -37,8 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'friends_api',
-    'rest_framework',
+
+    # Сторонние приложения (инструменты)
+    'rest_framework',  # Django REST Framework
+    'rest_framework_simplejwt',  # JWT-аутентификация
+
+    # Наши собственные приложения (крылья замка)
+    'friends_api',  # Приложение для друзей
 ]
 
 MIDDLEWARE = [
@@ -117,3 +122,23 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Настройки Django REST Framework
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',  # Используем JWT
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',  # По умолчанию требуем аутентификацию
+    ),
+}
+
+# Настройки JWT (JSON Web Tokens)
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),  # Access токен живёт 30 минут
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),     # Refresh токен живёт 1 день
+    'ROTATE_REFRESH_TOKENS': True,                   # Обновлять refresh токен при каждом обновлении
+    'BLACKLIST_AFTER_ROTATION': True,                # Старые refresh токены в чёрный список
+}
