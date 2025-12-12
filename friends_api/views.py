@@ -1,14 +1,10 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Friend
-
+from .serializers import FriendSerializer  # ← Импортируем сериализатор!
 
 @api_view(['GET'])
 def friend_list(request):
-    """
-    Получить список всех друзей.
-    """
     friends = Friend.objects.all()
-    # Пока вернём просто имена
-    data = [{'name': friend.name} for friend in friends]
-    return Response(data)
+    serializer = FriendSerializer(friends, many=True)  # ← Используем сериализатор
+    return Response(serializer.data)
