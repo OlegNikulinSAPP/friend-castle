@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Добавить друга</title>
+</head>
+<body>
+    <h1>Добавить нового друга</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <p><label>Имя друга: <input type="text" name="name"></label></p>
+        <p><label>Возраст: <input type="number" name="age"></label></p>
+        <p><label><input type="checkbox" name="is_close"> Близкий друг</label></p>
+        <button type="submit">Добавить</button>
+    </form>
+</body>
+</html>

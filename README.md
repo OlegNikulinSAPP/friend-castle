@@ -4150,3 +4150,47 @@ git add .
 git commit -m "Создана папка templates/friends_api для HTML-шаблонов"
 git push origin main
 ```
+
+# **Шаг 1.17.2: Создаём простой HTML-шаблон формы**
+
+**Филин** создал файл шаблона:
+
+```bash
+cd friends_api/templates/friends_api
+echo. > friend_form.html
+```
+
+Затем открыл файл `friend_form.html` в редакторе и написал:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Добавить друга</title>
+</head>
+<body>
+    <h1>Добавить нового друга</h1>
+    
+    <form method="POST">
+        {% csrf_token %}
+        <p><label>Имя друга: <input type="text" name="name"></label></p>
+        <p><label>Возраст: <input type="number" name="age"></label></p>
+        <p><label><input type="checkbox" name="is_close"> Близкий друг</label></p>
+        <button type="submit">Добавить</button>
+    </form>
+</body>
+</html>
+```
+
+— Простейшая форма с тремя полями, — сказал Филин. — Позже добавим остальные.
+
+---
+
+**💾 Коммитим:**
+
+```bash
+cd ..\..\..\..
+git add .
+git commit -m "Создан простой HTML-шаблон friend_form.html с формой для добавления друга"
+git push origin main
+```
